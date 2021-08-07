@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Painel de Gerenciamento de Notícias</title>
+		<link href="styles.css" type="text/css" rel="stylesheet"/>
+	</head>
+
+	<body>
+		<h1>Notícias</h1>
+
+		<!-- Trigger/Open The Modal -->
+		<button id="insertNewsBtn">Inserir Notícia</button>
+
+		<!-- The Modal -->
+		<div id="insertNewsModal" class="modal">
+
+			<!-- Modal content -->
+			<div class="modal-content">
+				<span class="close">&times;</span>
+
+				<form action="/noticias" method="POST">
+					<label>Link para Imagem:</label>
+					<br/>
+					<input type="url" name="image_url" required="required"/>
+					<br/>
+		
+					<label>Título:</label>
+					<br/>
+					<input type="text" name="title" required="required"/>
+					<br/>
+		
+					<label>Descrição:</label>
+					<br/>
+					<textarea name="description" rows="5" cols="30" required="required"></textarea>
+					<br/>
+		
+					<label>Tema:</label>
+					<br/>
+					<select name="topic" required="required">
+						<option value="Esportes">Esportes</option>
+						<option value="Política">Política</option>
+						<option value="Entretenimento">Entretenimento</option>
+						<option value="Famosos">Famosos</option>
+					</select>
+					<br/>
+		
+					<label>Link para Notícia</label>
+					<br/>
+					<input type="url" name="source_url" required="required"/>
+					<br/>
+		
+					<input type="submit" value="Enviar"/>
+				</form>
+			</div>
+		</div>
+
+		<script>
+			// Get the modal
+			const modal = document.getElementById("insertNewsModal");
+			
+			// Get the button that opens the modal
+			const btn = document.getElementById("insertNewsBtn");
+			
+			// Get the <span> element that closes the modal
+			const span = document.getElementsByClassName("close")[0];
+			
+			// When the user clicks the button, open the modal 
+			btn.onclick = function() {
+				modal.style.display = "block";
+			}
+			
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function() {
+				modal.style.display = "none";
+			}
+			
+			// When the user clicks anywhere outside of the modal, close it
+			window.onclick = function(event) {
+				if (event.target == modal) {
+					modal.style.display = "none";
+				}
+			}
+		</script>
+
+		<table>
+			<tr>
+				<th>Link Para Imagem</th>
+				<th>Título</th>
+				<th>Descrição</th>
+				<th>Tema</th>
+				<th>Link para Notícia</th>
+				<th></th>
+				<th></th>
+			</tr>
+
+			<% if(newsArray.length > 0) { %>
+				<% newsArray.forEach(news => { %>
+					<tr>
+						<td><%= news.image_url %></td>
+						<td><%= news.title %></td>
+						<td><%= news.description %></td>
+						<td><%= news.topic %></td>
+						<td><%= news.source_url %></td>
+						<td>
+							<form action="/noticias/<%= news._id %>/editar" method="POST">
+								<input type="submit" value="Editar">
+							</form>
+						</td>
+						<td>
+							<form action="/noticias/<%= news._id %>/excluir" method="GET">
+								<input type="submit" value="Excluir">
+							</form>
+						</td>
+					</tr>
+				<% }); %>
+			<% }; %>
+		</table>
+	</body>
+</html>

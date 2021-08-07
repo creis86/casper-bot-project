@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8"/>
+		<title>Página de Autenticação do Administrador</title>
+	</head>
+
+	<body>
+		<h1>Autenticação de Usuário</h1>
+
+		<% if(validation_err.length != 0) { %>
+			<%= validation_err[0].msg %>
+			<br/>
+			<br/>
+		<% } %>
+
+		<form action="/auth" method="POST">
+			<label>PIN:</label>
+			<br/>
+			<input type="password" name="PIN"/>
+			<br/>
+
+			<input type="submit" value="Entrar"/>
+		</form>
+	</body>
+</html>
