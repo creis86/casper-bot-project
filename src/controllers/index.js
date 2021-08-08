@@ -3,6 +3,8 @@ module.exports.index = (app, req, res) => {
 };
 
 module.exports.auth = (app, req, res) => {
+    // Validating PIN.
+    // If it's correct, authorize admin session.
     req.checkBody("PIN", "PIN é obrigatório").notEmpty();
     req.checkBody("PIN", "PIN só aceita caracteres numéricos").isInt();
     req.checkBody("PIN", "PIN incorreto").equals("1609");
@@ -13,5 +15,7 @@ module.exports.auth = (app, req, res) => {
         res.render("auth", {validation_err: err});
         return;
     }
-    res.redirect("/news")
+
+    req.session.authorized = true;
+    res.redirect("/news");
 };
