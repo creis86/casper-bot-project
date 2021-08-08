@@ -4,6 +4,6 @@ module.exports = (app) => {
     });
 
     app.post("/auth", (req, res) => {
-        app.src.controllers.index.user_auth(app, req, res);
+        app.src.controllers.index.auth(app, req, res);
     });
 };

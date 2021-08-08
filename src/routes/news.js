@@ -1,25 +1,25 @@
 module.exports = (app) => {
-    app.get("/noticias", (req, res) => {
+    app.get("/news", (req, res) => {
         app.config.db_connection();
-        const News = require("../models/news_model");
+        const News = require("../models/news");
 
         News.find().sort({updatedAt: -1})
             .then((result) => {
-                res.render("news_panel", {newsArray: result});
+                res.render("news", {newsArray: result});
             })
             .catch((err) => {
                 console.log(err);
             });
     });
 
-    app.post("/noticias", (req, res) => {
+    app.post("/news", (req, res) => {
         app.config.db_connection();
-        const News = require("../models/news_model");
+        const News = require("../models/news");
         const news = new News(req.body);
 
         news.save()
             .then(() => {
-                res.redirect("/noticias");
+                res.redirect("/news");
             })
             .catch((err) => {
                 console.log(err);

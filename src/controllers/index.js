@@ -1,8 +1,8 @@
 module.exports.index = (app, req, res) => {
-    res.render("auth_form", {validation_err: []});
+    res.render("auth", {validation_err: []});
 };
 
-module.exports.user_auth = (app, req, res) => {
+module.exports.auth = (app, req, res) => {
     req.checkBody("PIN", "PIN é obrigatório").notEmpty();
     req.checkBody("PIN", "PIN só aceita caracteres numéricos").isInt();
     req.checkBody("PIN", "PIN incorreto").equals("1609");
@@ -10,8 +10,8 @@ module.exports.user_auth = (app, req, res) => {
     const err = req.validationErrors();
 
     if(err) {
-        res.render("auth_form", {validation_err: err});
+        res.render("auth", {validation_err: err});
         return;
     }
-    res.redirect("/noticias")
+    res.redirect("/news")
 };

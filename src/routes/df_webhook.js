@@ -21,7 +21,7 @@ module.exports = (app) => {
         // Searching MongoDB for the latest 10 news that match the user's interest.
         // Building Facebook generic templates from fetched news.
         app.config.db_connection();
-        const News = require("../models/news_model");
+        const News = require("../models/news");
 
         News.find({topic: topicOfInterest}).sort({updatedAt: -1})
             .then((desiredNews) => {

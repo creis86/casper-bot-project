@@ -1,11 +1,11 @@
 module.exports = (app) => {
-    app.post("noticias/:id/editar", (req, res) => {
+    app.post("news/:id/update", (req, res) => {
         app.config.db_connection();
-        const News = require("../models/news_model");
+        const News = require("../models/news");
 
         News.findByIdAndUpdate(req.params.id, req.body)
             .then(() => {
-                res.redirect("/noticias");
+                res.redirect("/news");
             })
             .catch((err) => {
                 console.log(err);

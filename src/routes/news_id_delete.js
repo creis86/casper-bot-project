@@ -1,11 +1,11 @@
 module.exports = (app) => {
-    app.get("/noticias/:id/excluir", (req, res) => {
+    app.get("/news/:id/delete", (req, res) => {
         app.config.db_connection();
-        const News = require("../models/news_model");
+        const News = require("../models/news");
         
         News.findByIdAndDelete(req.params.id)
             .then(() => {
-                res.redirect("/noticias");
+                res.redirect("/news");
             })
             .catch((err) => {
                 console.log(err);
