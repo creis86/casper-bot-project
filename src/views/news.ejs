@@ -2,9 +2,18 @@
 <html lang="pt-br">
 	<head>
 		<meta charset="utf-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Painel de Gerenciamento de Notícias</title>
-		<link href="styles.css" type="text/css" rel="stylesheet"/>
+		<script src="js/jquery-2.2.1.js"></script>
+		<link href="css/styles.css" type="text/css" rel="stylesheet"/>
+
+		<!-- Exit button script -->
+		<script>
+			$(document).ready(() => {
+				$("#exitBtn").click(() => {
+					window.location.href = "/exit"
+				});
+			});
+		</script>
 	</head>
 
 	<body>
@@ -84,6 +93,7 @@
 			}
 		</script>
 
+		<!-- News table -->
 		<table>
 			<tr>
 				<th>Link Para Imagem</th>
@@ -117,5 +127,8 @@
 				<% }); %>
 			<% }; %>
 		</table>
+
+		<!-- Exit button -->
+		<button type="button" id="exitBtn">Sair</button>
 	</body>
 </html>
