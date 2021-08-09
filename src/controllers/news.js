@@ -1,4 +1,6 @@
 module.exports.render = (app, req, res) => {
+    req.session.authorized = true; // Forcing authorization temporarily because session variables are not being saved.
+
     if(req.session.authorized) {
         app.config.db_connection();
         const News = require("../models/news");
@@ -16,6 +18,8 @@ module.exports.render = (app, req, res) => {
 };
 
 module.exports.create = (app, req, res) => {
+    req.session.authorized = true; // Forcing authorization temporarily because session variables are not being saved.
+    
     if(req.session.authorized) {
         app.config.db_connection();
         const News = require("../models/news");
